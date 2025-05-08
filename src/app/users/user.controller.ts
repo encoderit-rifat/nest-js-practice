@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete,BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, BadRequestException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './schemas/user.schema';
 
@@ -10,16 +10,7 @@ export class UserController {
 
     @Post('create')
     async create(@Body() user: Partial<User>): Promise<User> {
-        try {
-            return await this.userService.create(user);
-        }
-        catch (error) {
-            if (error.name === 'ValidationError') {
-                const messages = Object.values(error.errors).map((err: any) => err.message);
-                throw new BadRequestException(messages);
-            }
-            throw error;
-        }
+        return this.userService.create(user);
     }
 
     @Get()
