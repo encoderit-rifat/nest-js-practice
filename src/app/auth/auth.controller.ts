@@ -22,9 +22,17 @@ export class AuthController {
   }
   @UseGuards(JwtAuthGuard)
   @Post('logout')
-  logout(@Request() req) {
+  logout(@Request() req: Express.Request) {
     console.log('Logout called');
     console.log('req', req);
-    return req.logout();
+    // return new Promise((resolve, reject) => {
+    //   req.logout((err) => {
+    //     if (err) {
+    //       console.error('Logout error:', err);
+    //       return reject(err);
+    //     }
+    //     resolve({ message: 'Logout successful' });
+    //   });
+    // });
   }
 }
