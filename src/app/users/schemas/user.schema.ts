@@ -14,6 +14,15 @@ export class User {
   @Prop({ required: true })
   password: string;
 
+  @Prop({ default: false })
+  is_admin: Boolean;
+
+  @Prop({ default: false })
+  is_active: Boolean;
+
+  @Prop({ default: null })
+  created_by: string;
+
   @Prop({ default: Date.now })
   createdAt: Date;
 }

@@ -1,7 +1,11 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './schemas/user.schema';
+import { CheckPolicies } from '../casl/policy.decorator';
+import { PoliciesGuard } from '../casl/policies.guard';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UserController {
     constructor(private readonly userService: UserService) {
@@ -14,6 +18,8 @@ export class UserController {
     }
 
     @Get()
+    @UseGuards(PoliciesGuard)
+    @CheckPolicies((ability) => ability.can('read', 'User'))
     async list(): Promise<User[]> {
         return this.userService.list();
     }

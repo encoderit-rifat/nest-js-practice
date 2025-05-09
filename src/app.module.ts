@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { UserModule } from './app/users/user.module';
 import { AuthModule } from './app/auth/auth.module';
+import { CaslModule } from './app/casl/casl.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { AuthModule } from './app/auth/auth.module';
     // Import Modules
     UserModule,
     AuthModule, // User module
+    // CaslModule, // CASL module
   ],
   controllers: [AppController],
   providers: [AppService],
