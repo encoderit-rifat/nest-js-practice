@@ -23,6 +23,8 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('logout')
   logout(@Request() req) {
-    return { message: 'Logged out successfully' };
+    console.log('Logout called');
+    console.log('req', req);
+    return req.logout();
   }
 }
